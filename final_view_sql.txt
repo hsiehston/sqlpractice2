@@ -1,0 +1,10 @@
+select test3.half.A班科目,
+A級人數80分以上,
+b級人數60到79分以上,
+c級人數0到59分以上,
+a級平均分數80分以上,
+b級平均分數60到79分,
+c級平均分數0到59分
+FROM TEST3.HALF
+LEFT JOIN test3.AVGFINAL
+ON test3.half.A班科目=test3.AVGFINAL.A班科目

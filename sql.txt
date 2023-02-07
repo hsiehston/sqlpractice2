@@ -1,0 +1,37 @@
+想法：做成六個view 一張一張 left join 起來
+
+/*first*/
+select test3.grades.category as A班科目, count(test3.grades.grade) as 'A級人數80分以上'
+from test3.grades 
+where test3.grades.grade>=80 and classid='A'
+group by test3.grades.category;
+
+/*second*/
+select test3.grades.category as A班科目, count(test3.grades.grade) as 'B級人數60~79分以上'
+from test3.grades 
+where test3.grades.grade>=60 and test3.grades.grade<=79 and classid='A'
+group by test3.grades.category;
+
+/*third*/
+select test3.grades.category as A班科目, count(test3.grades.grade) as 'C級人數0~59分以上'
+from test3.grades 
+where test3.grades.grade>=0 and test3.grades.grade<=59 and classid='A'
+group by test3.grades.category;
+
+/*avg1*/
+select test3.grades.category as A班科目, avg(test3.grades.grade) as A級平均分數80分以上
+from test3.grades
+where grade>=80 and classid='A'
+group by test3.grades.category;
+
+/*avg2*/
+select test3.grades.category as A班科目, avg(test3.grades.grade) as B級平均分數60到79分
+from test3.grades
+where grade>=60 AND grade<=79 and classid='A'
+group by test3.grades.category;
+
+/*avg3*/
+select test3.grades.category as A班科目, avg(test3.grades.grade) as C級平均分數0到59分
+from test3.grades
+where grade>=0 AND grade<=59 and classid='A'
+group by test3.grades.category;
