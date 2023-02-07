@@ -1,37 +1,58 @@
-想法：做成六個view 一張一張 left join 起來
+做成六個view 一張一張 left join 起來
 
-/*first*/
-select test3.grades.category as A班科目, count(test3.grades.grade) as 'A級人數80分以上'
-from test3.grades 
-where test3.grades.grade>=80 and classid='A'
-group by test3.grades.category;
+/*1*/
+select grades.category as A班科目, count(grades.grade) as 'A級人數80分以上'
+from grades 
+where .grades.grade>=80 and classid='A'
+group by .grades.category;
 
-/*second*/
-select test3.grades.category as A班科目, count(test3.grades.grade) as 'B級人數60~79分以上'
-from test3.grades 
-where test3.grades.grade>=60 and test3.grades.grade<=79 and classid='A'
-group by test3.grades.category;
+/*2*/
+select grades.category as A班科目, count(grades.grade) as 'B級人數60~79分以上'
+from grades 
+where grades.grade>=60 and grades.grade<=79 and classid='A'
+group by grades.category;
 
-/*third*/
-select test3.grades.category as A班科目, count(test3.grades.grade) as 'C級人數0~59分以上'
-from test3.grades 
-where test3.grades.grade>=0 and test3.grades.grade<=59 and classid='A'
-group by test3.grades.category;
+/*3*/
+select grades.category as A班科目, count(grades.grade) as 'C級人數0~59分以上'
+from .grades 
+where .grades.grade>=0 and .grades.grade<=59 and classid='A'
+group by grades.category;
 
-/*avg1*/
-select test3.grades.category as A班科目, avg(test3.grades.grade) as A級平均分數80分以上
-from test3.grades
+/*4*/
+select grades.category as A班科目, avg(grades.grade) as A級平均分數80分以上
+from grade
 where grade>=80 and classid='A'
-group by test3.grades.category;
+group by grades.category;
 
-/*avg2*/
-select test3.grades.category as A班科目, avg(test3.grades.grade) as B級平均分數60到79分
-from test3.grades
+/*5*/
+select grades.category as A班科目, avg(grades.grade) as B級平均分數60到79分
+from grades
 where grade>=60 AND grade<=79 and classid='A'
-group by test3.grades.category;
+group by grades.category;
 
-/*avg3*/
-select test3.grades.category as A班科目, avg(test3.grades.grade) as C級平均分數0到59分
-from test3.grades
+/*6*/
+select grades.category as A班科目, avg(grades.grade) as C級平均分數0到59分
+from grades
 where grade>=0 AND grade<=59 and classid='A'
-group by test3.grades.category;
+group by grades.category;
+
+//left join 語法 (1 join 2 以此類推)
+
+SELECT column_name(s)
+FROM table1
+LEFT JOIN table2
+ON table1.column_name = table2.column_name;
+
+
+select 第一張view.A班科目 ,
+
+A級人數80分以上 , 
+
+ifnull(B級人數60到79分以上,0) as B級人數60到79分以上
+
+from 第一張view
+
+left join 第二張view
+
+on 第一張view.A班科目=第二張view.A班科目
+
